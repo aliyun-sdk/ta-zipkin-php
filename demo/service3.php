@@ -1,0 +1,22 @@
+<?php
+
+include "common.php";
+
+use AliyunSDK\TaZipkin\Tags\SelfTags;
+use AliyunSDK\TaZipkin\Tags\SpanTags;
+
+$tracing = buildTracing(3);
+
+$root = $tracing->getSpanFromMap(
+    getallheaders(),
+    SpanTags::createAsServer("service3.root"),
+    SelfTags::create()->addItem("header", json_encode(getallheaders()))
+);
+
+$root->start();
+
+usleep(1000);   // 模拟业务处理
+
+$root->finish();
+
+$tracing->flush();
