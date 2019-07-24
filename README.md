@@ -9,4 +9,5 @@
 
 
 ## Usage
+Please see [demo](./demo)  
 Please see [https://github.com/openzipkin/zipkin-php](https://github.com/openzipkin/zipkin-php)
